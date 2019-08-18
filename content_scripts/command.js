@@ -1299,3 +1299,8 @@ Command.configureSettings = function(_settings) {
     this.init(false);
   }
 };
+
+
+Command.focustab = function(){
+  RUNTIME('focusTab');
+}

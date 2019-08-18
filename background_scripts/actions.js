@@ -886,6 +886,11 @@ Actions = (function() {
     chrome.tabs.update(o.sender.tab.id, {muted: !o.sender.tab.mutedInfo.muted});
   };
 
+  _.focusTab = function(o) {
+	  chrome.tabs.update(o.sender.tab.id, {active: true});
+	  chrome.windows.update(o.sender.tab.windowId, {focused: true});
+  };
+
   return function(_request, _sender, _callback, _port) {
     var action = _request.action;
     if (!_.hasOwnProperty(action) || typeof _[action] !== 'function')
