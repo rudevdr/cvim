@@ -540,7 +540,7 @@ Actions = (function() {
       }
       chrome.tabs.getZoom(o.sender.tab.id, function(zoomFactor) {
         chrome.tabs.setZoomSettings(o.sender.tab.id, {
-          scope: 'per-tab',
+          scope: 'per-origin',
         }, function() {
           chrome.tabs.setZoom(o.sender.tab.id, override || zoomFactor + scale * repeats);
         });
@@ -889,7 +889,15 @@ Actions = (function() {
   _.focusTab = function(o) {
 	  chrome.tabs.update(o.sender.tab.id, {active: true});
 	  chrome.windows.update(o.sender.tab.windowId, {focused: true});
-  };
+	};
+
+	_.setZoom = function(o){
+		chrome.tabs.setZoomSettings(o.sender.tab.id, {
+				scope: 'per-tab',
+		}, function() {
+			chrome.tabs.setZoom(o.sender.tab.id, o.request.level);
+		})
+	}
 
   return function(_request, _sender, _callback, _port) {
     var action = _request.action;
