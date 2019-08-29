@@ -9,7 +9,7 @@ set -eu
 cd -P -- "$(dirname "$0")"/..
 
 if [ -e release ]; then
-  rm -r release*
+	rm -r release*
 fi
 
 scripts/create_pages.js

@@ -9,11 +9,11 @@ let homedirectory = '/home/jake'
 let searchlimit = 25
 
 let completionengines = [
-      \ 'google',  'wikipedia', 'imdb',
-      \ 'amazon', 'wolframalpha', 'duckduckgo'
-      \ ]
+			\ 'google',  'wikipedia', 'imdb',
+			\ 'amazon', 'wolframalpha', 'duckduckgo'
+			\ ]
 let qmark
-      \ a = ['http://www.reddit.com/r/learnjavascript/new', 'http://www.reddit.com/r/learnpython/new/', 'http://www.reddit.com/r/learnprogramming/new']
+			\ a = ['http://www.reddit.com/r/learnjavascript/new', 'http://www.reddit.com/r/learnpython/new/', 'http://www.reddit.com/r/learnprogramming/new']
 imap <C-o> editWithVim
 map <C-o> :duplicate<CR>
 map af createTabbedHint
@@ -53,20 +53,20 @@ unmap j k h l
 let @@a = 3
 
 site '*://*/*' {
-  call :script [].slice.call(document.querySelectorAll('*[accesskey]')).forEach(function(e){e.removeAttribute('accesskey')});
-  call :script console.log(3);
+call :script [].slice.call(document.querySelectorAll('*[accesskey]')).forEach(function(e){e.removeAttribute('accesskey')});
+call :script console.log(3);
 }
 
 let blacklists = ["http://localhost/*","http://lo-th.github.io/*"]
 
 f(x) -> {{
-  console.log(x);
+console.log(x);
 }}
 
 command refresh open @%
 
 -> {{
-  console.log();
+console.log();
 }}
 
 " Comment 1
