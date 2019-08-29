@@ -1337,3 +1337,18 @@ Command.focustab = function(){
 Command.setzoom = function(level){
 		RUNTIME('setZoom', {level: level});
 }
+
+Command.onreload = function(callback, args) {
+    ctype = typeof callback
+    switch (ctype) {
+        case "function":
+            callback = callback.toString()
+        case "string":
+            RUNTIME('onReload', {
+                callback: callback,
+                args: args,
+                ctype: ctype
+            })
+            break;
+    }
+}

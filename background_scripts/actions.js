@@ -899,6 +899,18 @@ Actions = (function() {
 		})
 	}
 
+  _.onReload = function(o) {
+      chrome.tabs.onUpdated.addListener(function onReload(tabId, changeInfo, tab) {
+          message = o.request
+          message.type = "onReload"
+          chrome.tabs.sendMessage(o.sender.tab.id, message, function(response) {
+              if (response && response.received) {
+                  chrome.tabs.onUpdated.removeListener(onReload);
+              }
+          });
+      });
+  }
+
   return function(_request, _sender, _callback, _port) {
     var action = _request.action;
     if (!_.hasOwnProperty(action) || typeof _[action] !== 'function')
