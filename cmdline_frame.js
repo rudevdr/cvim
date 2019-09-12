@@ -14,14 +14,17 @@ chrome.runtime.onMessage.addListener(function onMessage(request, sender, sendRes
             received: true
         })
         ctype = request.ctype
+        args = '__args = ' + JSON.stringify(request.args) + ';\n' + 'if(__args){Object.keys(__args).forEach(key => {window[key] = __args[key]});}\n'
         switch (ctype) {
             case "function":
-                callback = new Function('return ' + request.callback)()
-                callback.call(request.args)
+                code = args + '(' + request.callback + ')();'
                 break;
             case "string":
-                eval(request.callback)
+                code = args + request.callback
                 break;
         }
+        chrome.tabs.executeScript({
+            code: code
+        })
     }
 });
