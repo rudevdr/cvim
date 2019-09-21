@@ -52,7 +52,7 @@ map ga :settings<CR>
 unmap j k h l
 let @@a = 3
 
-site '*://*/*' {
+site '*://*/*', '*://*.google.com*', '*://*reddit.com*' {
 call :script [].slice.call(document.querySelectorAll('*[accesskey]')).forEach(function(e){e.removeAttribute('accesskey')});
 call :script console.log(3);
 }

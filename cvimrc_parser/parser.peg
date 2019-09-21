@@ -151,9 +151,11 @@ SetStatement
   / SET _ !'no' a:Identifier { var r = {}; r[a] = true; return r; }
 
 SiteStatement
-  = SITE _ a:StringLiteral __ '{' WhiteSpace* EOL b:Scope '}' {
-    var r = {sites: {}}; r.sites[a] = b; return r;
-  }
+= SITE _ a:( ','? ' '* x:StringLiteral {return x;} )+  __  '{' WhiteSpace* EOL b:Scope '}' {
+	var r = {sites: {}}; 
+    String.prototype.split.call(a, ',').forEach(function(k){r.sites[k] = b})
+    return r;
+}
 
 UnmapIdentifierList
   = __ a:MapIdentifier _ b:UnmapIdentifierList __ { return [a].concat(b); }
