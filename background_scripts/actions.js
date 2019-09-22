@@ -1032,7 +1032,7 @@ Actions = (function() {
         chrome.tabs.onUpdated.addListener(function onReload(tabId, changeInfo, tab) {
             message = o.request
             message.type = "onReload"
-            if (changeInfo.status) {
+            if (changeInfo.status == "loading") {
                 chrome.tabs.sendMessage(o.sender.tab.id, message, function(response) {
                     if (response && response.received) {
                         chrome.tabs.onUpdated.removeListener(onReload);

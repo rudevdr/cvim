@@ -330,5 +330,29 @@ chrome.extension.onMessage.addListener(function(request, sender, callback) {
         case 'isFrameVisible':
             callback(e.innerWidth > 5 && e.innerHeight > 5);
             break;
+        case 'onReload':
+            /**
+			 if callback is function, inside callback use `this` to use args passed as second method in Command.onreload e.g
+             function test(){
+				console.log('value', this.a) //if a is not defined then will throw error, but we are using this.a
+             }
+             a = 10
+			 Command.onreload(test, {a})
+			 **/
+            if (request.type == "onReload") {
+                callback({
+                    received: true
+                })
+                args = '__args = ' + JSON.stringify(request.args) + ';\n' + 'if(__args){Object.keys(__args).forEach(key => {window[key] = __args[key]});}\n'
+                switch (request.ctype) {
+                    case "function":
+                        code = args + '(' + request.callback + ')();'
+                        break;
+                    case "string":
+                        code = args + request.callback
+                        break;
+                }
+                eval(code)
+            }
     }
 });
