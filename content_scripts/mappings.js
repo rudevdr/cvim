@@ -31,6 +31,7 @@ Mappings.defaults = [
     ['gxt', 'closeTabRight'],
     ['gx0', 'closeTabsToLeft'],
     ['gx$', 'closeTabsToRight'],
+    ['gxx', 'closeOthers'],
     ['s', 'scrollDown'],
     ['j', 'scrollDown'],
     ['w', 'scrollUp'],
@@ -270,6 +271,9 @@ Mappings.actions = {
     },
     closeTabsToRight: function() {
         RUNTIME('closeTabsToRight');
+    },
+    closeOthers: function() {
+        RUNTIME('closeOthers');
     },
     pinTab: function() {
         RUNTIME('pinTab');

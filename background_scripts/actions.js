@@ -215,6 +215,15 @@ Actions = (function() {
                     closeTab(o, tabs.length - o.sender.tab.index);
                 });
         };
+        _.closeOthers = function(o) {
+            chrome.tabs.query({
+                currentWindow: true
+            }, function(tabs) {
+                tabs.filter((tab) => (tab.id != o.sender.tab.id)).forEach((tab, index) => {
+                    chrome.tabs.remove(tab.id)
+                })
+            });
+        };
     })();
 
     _.getWindows = function(o) {
