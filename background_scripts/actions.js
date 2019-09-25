@@ -1025,7 +1025,7 @@ Actions = (function() {
             active: true
         });
         chrome.windows.update(o.sender.tab.windowId, {
-            focused: true
+            drawAttention: true
         });
     };
 
