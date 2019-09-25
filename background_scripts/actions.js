@@ -1027,6 +1027,9 @@ Actions = (function() {
         chrome.windows.update(o.sender.tab.windowId, {
             drawAttention: true
         });
+        chrome.tabs.sendMessage(o.sender.tab.id, {
+            action: 'focusTabOverlay'
+        });
     };
 
     _.setZoom = function(o) {

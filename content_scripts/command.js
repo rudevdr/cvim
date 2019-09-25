@@ -1362,36 +1362,7 @@ Command.configureSettings = function(_settings) {
 
 Command.focustab = function() {
     if (!document.hasFocus()) {
-        window.onbeforeunload = function(e) {
-            return 'blocked accidental?';
-        }
-
         RUNTIME('focusTab');
-
-        overlay = document.createElement('div');
-
-        overlay.style.cssText = "position: fixed; display: block; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgb(233, 30, 99, 0.3); z-index: 1000; cursor: pointer; text-align: center; vertical-align: middle; font-size: 50px";
-
-        overlay.onclick = function(e) {
-            e.stopPropagation();
-            overlay.remove()
-        }
-
-        blocked = 0;
-        overlay.onkeypress = function(e) {
-            overlay.innerText = 'BLOCKED ' + ++blocked + ' ACCIDENTAL INPUT ON AUTOFOCUS';
-        }
-
-        document.body.appendChild(overlay)
-
-        setTimeout(function() {
-            overlay.remove()
-        }, 1000)
-
-        setTimeout(function() {
-            window.onbeforeunload = function(e) {};
-        }, 2500)
-
     }
 }
 
