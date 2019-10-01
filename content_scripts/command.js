@@ -1386,3 +1386,18 @@ Command.onreload = function(callback, args) {
             break;
     }
 }
+
+Command.insertJS = function(code, args) {
+    switch (typeof code) {
+        case "function":
+            text = '(' + code.toString() + ')(' + JSON.stringify(args) + ')'
+            break;
+        case "string":
+            text = code;
+            break;
+    }
+
+    let script = document.createElement('script')
+    script.textContent = text;
+    document.body.appendChild(script)
+}
